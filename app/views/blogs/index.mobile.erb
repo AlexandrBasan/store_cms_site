@@ -1,0 +1,44 @@
+<div class="pages page-blog-list" id="page-blog-list">
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <h4 class="line-divider" id="blog" name="blog" style="text-align: center"><%= (t 'menu.blog') %></h4>
+    </header>
+    <!-- End Header -->
+
+    <div class="row-fluid">
+      <div class="col-md-12">
+        <!-- Article -->
+        <%= will_paginate %>
+        <% @blogs.each do |blog| %>
+        <article>
+          <!-- Blog title -->
+          <h4 style="border-bottom: 1px solid #bbb; padding: 13.5px 0;" id="blog_<%= blog.title %>" name="blog_<%= blog.title %>">
+            <%= blog.title %></h4>
+            <div class="row">
+              <h4><div class="col-md-8"><small><%= (t 'blog.created_at') %> <%= blog.created_at.strftime("%d/%m/%Y - %H:%M:%S") %></small></div></h4>
+              <div class="col-md-4" style="text-align: right">
+                <% case blog.content_type %>
+                <% when "news" %>
+                    <span class="label label-primary"><%= (t 'blog.news') %></span>
+                <% when "saas" %>
+                    <span class="label label-warning"><%= (t 'blog.teleport_saas_system') %></span>
+                <% when "specials" %>
+                    <span class="label label-success"><%= (t 'blog.specials') %></span>
+                <% when "companies_news" %>
+                    <span class="label label-info"><%= (t 'blog.companies_news') %></span>
+                <% else %>
+                    <span class="label label-default"><%= (t 'blog.all') %></span>
+                <% end %>
+              </div>
+            </div>
+
+        <p style="text-align: justify"><%= blog.content %></p>
+        </article>
+            <% end %>
+        <%= will_paginate %>
+
+      </div>
+    </div>
+  </div>
+</div>
